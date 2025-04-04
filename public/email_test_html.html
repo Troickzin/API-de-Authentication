@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Concluído</title>
+    <style>
+        .body {
+            font-family: Arial, sans-serif;
+            background-color: #e6e6e6;
+            margin: 0;
+            padding: 20px 0px 0px 0px;
+            width: 100vw;
+            height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto; /* Adicionado margin-top de 40px */
+            padding: 20px;
+            background: linear-gradient(178deg, rgba(255,255,255,1) 75%, rgba(250,246,252,1) 75%);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333333;
+        }
+        .content {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .content p {
+            font-size: 16px;
+            color: #555555;
+            line-height: 1.5;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #28a745;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .ii a[href]{
+          color:#fff;
+        }
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 14px;
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+<div class="body">
+    <div class="container">
+        <div class="header">
+            <h1>Login Realizado com Sucesso!</h1>
+        </div>
+        <div class="content">
+            <p>Olá, <strong>${nome}</strong></p>
+            <p>Seu login foi realizado com sucesso em nossa plataforma.</p>
+            <p>Se você reconhece essa atividade, não é necessário fazer nada. Caso contrário, recomendamos que você altere sua senha imediatamente para garantir a segurança da sua conta.</p>
+            <a href="${process.env.FRONT_END_URL}/config" class="button">Acessar Configurações da Conta</a>
+        </div>
+        <div class="footer">
+            <p>&copy; 2023 Sua Empresa. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

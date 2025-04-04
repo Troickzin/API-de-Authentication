@@ -1,35 +1,66 @@
-# **API DE AUTENTICAÇÃO**
+# **API de Autenticação**
 
-Fiz um sistema de autenticação que levou apenas alguns dias, com rotas para fazer o cadastro, login, e para deslogar, tambem e possivel vincular ha uma conta existente ao sistema de login com o google, para assim poder entrar direto pelo google.
+Este projeto é um sistema de autenticação desenvolvido em poucos dias, contendo rotas para cadastro, login e logout. Além disso, permite vincular uma conta existente ao sistema de login do Google, possibilitando a autenticação direta via Google OAuth.
 
-###### ( releve o codigo bagunçado, queria testa-lo antes de fazer uma versao final e organizada, alem de ter codigos que eu utilizei para experimentos )
+> **Nota:** O código foi feito para fins de aprendizado, ele ainda esta incompleto e contendo trechos que utilizei para experimentos, quaisquer feedback é bem-vindo!
 
-## **End Points** :
+## 🚀 **Endpoints**
 
-- **POST Auth/signIn --** Esta rota pede um json no body que contem **{email, senha}**
+### 🔑 **Autenticação**
 
-- **POST Auth/signUp --** Esta rota pede um FormData no body que contem **{email, senha, nome, apelido, foto_de_perfil}**
+- **`POST /Auth/signIn`**
 
-- **POST Auth/signOut --** Esta rota apenas limpa os Cookies httpOnly
+  - Recebe um JSON no corpo da requisição com os seguintes campos:
 
-- **GET Auth/verify/:id --** Esta rota valida o token enviado para o e-mail ( usada para teste, sujeito a re-escrita )
+    ```json
+    {
+      "email": "usuario@example.com",
+      "senha": "sua_senha"
+    }
+    ```
 
-- **GET Auth/google --** Rota que redireciona para o 0Auth do google
+- **`POST /Auth/signUp`**
 
-- **GET Auth/google/callback --** Rota que recebe os dados vindo do 0Auth do google
+  - Recebe um `FormData` no corpo da requisição com os seguintes campos:
 
-## **Tecnologias utilizadas** :
+    ```json
+    {
+      "email": "usuario@example.com",
+      "senha": "sua_senha",
+      "nome": "Seu Nome",
+      "apelido": "Apelido",
+      "foto_de_perfil": "imagem_convertida_em_base64"
+    }
+    ```
 
-- **Node.Js + Typescript + Express --** Todo o corpo da API
+    > _Nota:_ Ao testar com Next.js, percebi que a propriedade path não era passada, assim impossibilitando o salvamento na AWS/Cloudinary. A solução temporária que encontrei foi enviar a imagem já convertida em base64. Pretendo adicionar uma verificação para identificar se a imagem é um arquivo ou um base64.
 
-- **MongoDB --** armazenar os dados dos usuarios
+- **`POST /Auth/signOut`**
+  - Limpa os cookies `httpOnly` para efetuar o logout.
 
-- **AWS Bucket S3 --** armazenar as fotos de perfil dos usuarios ( ja cheguei a utilizar o cloudinary, mas optei pelo S3 por questao de aprendizado )
+### ✅ **Verificação e OAuth**
 
-- **Passport --** Para ter acesso ao sistema de Auth do google
+- **`GET /Auth/verify/:id`**
 
-- **Json Web Token --** Para armazenamento seguro dos tokens
+  - Valida o token enviado por e-mail para confirmação de conta. _(Esta rota está sujeita a reestruturação.)_
 
-- **Bcrypt --** Utilizado para criptografar as senhas do usuario
+- **`GET /Auth/google`**
 
-- **Nodemailer --** Utilizado para validar o email no cadastro do usuario por meio de token, e avisar ao usuario movimentações na conta
+  - Redireciona o usuário para o OAuth do Google.
+
+- **`GET /Auth/google/callback`**
+  - Recebe os dados do usuário autenticado pelo Google.
+
+## 🛠 **Tecnologias Utilizadas**
+
+- **Node.js + TypeScript + Express** → Estrutura principal da API.
+- **MongoDB** → Armazenamento dos dados dos usuários.
+- **AWS S3 Bucket** → Armazenamento das fotos de perfil. _(Tinha utilizado o Cloudinary, mas optei pelo S3 para aprendizado.)_
+- **Passport.js** → Integração com o sistema de autenticação do Google.
+- **JSON Web Token (JWT)** → Geração e validação de tokens de autenticação.
+- **Bcrypt** → Hash e criptografia de senhas dos usuários.
+- **Nodemailer** → Envio de e-mails para validação de conta e notificações de atividades.
+
+## 📌 **Considerações Finais**
+
+Este projeto ainda está em desenvolvimento e sujeito a melhorias. Feedbacks e sugestões são bem-vindos!
